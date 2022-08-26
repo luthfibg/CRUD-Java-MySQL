@@ -30,12 +30,21 @@ public class DataInterface {
                 } catch (SQLException err){
                     Logger.getLogger(DataInterface.class.getName()).log(Level.SEVERE, null, err);
                 }
+                jTextFieldUsername.setText("");
+                jTextFieldScore.setText("");
+                jTextFieldRank.setText("");
             }
         });
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SwingUtilities.invokeLater(DataInterface::createUpdateGUI);
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(DataInterface::createDeleteGUI);
             }
         });
     }
@@ -88,6 +97,17 @@ public class DataInterface {
         jFrame.setVisible(true);
     }
 
+    private static void createDeleteGUI(){
+        DeletePanel deleteUI = new DeletePanel();
+        JPanel deleteRoot = deleteUI.getDeletePanel();
+
+        JFrame jFrame = new JFrame();
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setContentPane(deleteRoot);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+    }
     private JPanel mainPanel;
     private JLabel jTitlePanel;
     private JTextField jTextFieldUsername;
